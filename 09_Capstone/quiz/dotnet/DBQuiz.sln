@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBQuiz", "DBQuiz\DBQuiz.csproj", "{D44728AE-BA46-4FEC-A8F6-608E525DB313}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBQuiz.Tests", "DBQuiz.Tests\DBQuiz.Tests.csproj", "{C0413366-3300-4D23-8DA1-0777540DA8B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D44728AE-BA46-4FEC-A8F6-608E525DB313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D44728AE-BA46-4FEC-A8F6-608E525DB313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D44728AE-BA46-4FEC-A8F6-608E525DB313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D44728AE-BA46-4FEC-A8F6-608E525DB313}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0413366-3300-4D23-8DA1-0777540DA8B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0413366-3300-4D23-8DA1-0777540DA8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0413366-3300-4D23-8DA1-0777540DA8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0413366-3300-4D23-8DA1-0777540DA8B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
