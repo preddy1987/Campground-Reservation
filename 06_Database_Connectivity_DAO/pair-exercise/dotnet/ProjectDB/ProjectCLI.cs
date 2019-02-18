@@ -21,7 +21,7 @@ namespace ProjectDB
         const string Command_AssignEmployeeToProject = "9";
         const string Command_RemoveEmployeeFromProject = "10";
         const string Command_Quit = "q";
-        const string DatabaseConnection = "";
+        const string DatabaseConnection = @"Data Source=localhost\sqlexpress;Initial Catalog=EmployeeDB;Integrated Security=True";
 
         public void RunCLI()
         {
@@ -104,7 +104,7 @@ namespace ProjectDB
             }
             else
             {
-                Console.WriteLine("*** DID NOT CREATE ***");
+                Console.WriteLine("*** DID NOT REMOVE ***");
             }
 
         }
