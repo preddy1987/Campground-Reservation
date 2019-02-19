@@ -1,0 +1,17 @@
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\IntegrationDALTests.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\IntegrationDALTests.pdb
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\ProjectDB.exe
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\ProjectDB.pdb
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\ProjectDB.exe.config
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\obj\Debug\IntegrationDALTests.csprojAssemblyReference.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\obj\Debug\IntegrationDALTests.csproj.CoreCompileInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\obj\Debug\IntegrationDALTests.csproj.CopyComplete
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\obj\Debug\IntegrationDALTests.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\06_Database_Connectivity_DAO\pair-exercise\dotnet\IntegrationDALTests\obj\Debug\IntegrationDALTests.pdb
