@@ -15,6 +15,7 @@ namespace ProjectDB.DAL
         private const string SqlGetLastDepartmentId = "SELECT MAX(department_id) FROM department;";
         private const string SqlUpdateDepartment = "UPDATE department SET name = @name WHERE department_id = @id;";
         private const string SqlInsertDepartment = "INSERT INTO department VALUES (@name);";
+        private const string SqlGetADepartment = "Select * from department where department_id = @id;";
 
         // Single Parameter Constructor
         public DepartmentSqlDAL(string dbConnectionString)
@@ -126,5 +127,45 @@ namespace ProjectDB.DAL
             }
         }
 
+
+        public Department GetADepartment(int id)
+        {
+            List<Department> output = new List<Department>();
+            Department result = null;
+            //Always wrap connection to a database in a try-catch block
+            try
+            {
+                //Create a SqlConnection to our database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand cmd = new SqlCommand(SqlGetADepartment, connection);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the query to the database
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    // The results come back as a SqlDataReader. Loop through each of the rows
+                    // and add to the output list
+                    while (reader.Read())
+                    {
+                        // Read in the value from the reader
+                        // Reference by index or by column_name
+                        Department department = new Department();
+                        department.Id = Convert.ToInt32(reader["department_id"]);
+                        department.Name = Convert.ToString(reader["name"]);
+
+                        // Add the department to the output list                       
+                       result = department;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // A SQL Exception Occurred. Log and throw to our application!!
+                throw;
+            }
+            return result;
+        }
     }
 }
