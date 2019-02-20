@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.SqlClient;
-using EncryptionMessenger.Exceptions;
+using MessengerService.Exceptions;
 using System.Collections.Generic;
-using EncryptionMessenger.Models;
+using MessengerService.Models;
 
-namespace EncryptionMessengerService
+namespace MessengerService
 {
     public class EncryptionMessenger
     {

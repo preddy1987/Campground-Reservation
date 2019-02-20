@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EncryptionMessenger.Models;
-using EncryptionMessengerService;
+using MessengerService.Models;
+using MessengerService;
 
 namespace EncryptionMessengerCLI
 {

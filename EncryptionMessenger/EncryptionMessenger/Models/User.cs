@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EncryptionMessenger.Models
+namespace MessengerService.Models
 {
    public class User
     {

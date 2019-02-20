@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
-using EncryptionMessenger.Models;
+using MessengerService.Models;
+using MessengerService.Interfaces;
 using System.Transactions;
 
-namespace EncryptionMessenger.Database
+namespace MessengerService.Database
 {
-   public class MessengerDBService
+   public class MessengerDBService : IMessengerService
     {
         #region Variables
 
