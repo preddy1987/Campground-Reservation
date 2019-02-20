@@ -4,16 +4,16 @@ using EncryptionMessenger.Exceptions;
 using System.Collections.Generic;
 using EncryptionMessenger.Models;
 
-namespace EncryptionMessenger
+namespace EncryptionMessengerService
 {
-    class EncryptionMessenger
+    public class EncryptionMessenger
     {
         public void RegisterUser(User userModel)
         {
             UserItem userItem = null;
             try
             {
-               // userItem = _db.GetUserItem(userModel.Username);
+                userItem = _db.GetUserItem(userModel.Username);
             }
             catch (Exception)
             {
@@ -37,7 +37,7 @@ namespace EncryptionMessenger
                 Hash = passHelper.Hash,
             };
 
-           // _db.AddUserItem(newUser);
+            _db.AddUserItem(newUser);
             LoginUser(newUser.Username, userModel.Password);
         }
         /// <summary>
@@ -51,7 +51,7 @@ namespace EncryptionMessenger
 
             try
             {
-                // user = _db.GetUserItem(username);
+                 user = _db.GetUserItem(username);
                 
             }
             catch (Exception)
