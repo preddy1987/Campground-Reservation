@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EncryptionMessenger.Models
+namespace MessengerService.Models
 {
     public class UserItem : BaseItem
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EncryptionMessengerService
+namespace MessengerService
 {
     /// <summary>
     /// Used to manage password verification, hash generation, salt generation, and encryption

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EncryptionMessenger.Exceptions
+namespace MessengerService.Exceptions
 {
     /// <summary>
     /// Specifies that passwords do not match each other
