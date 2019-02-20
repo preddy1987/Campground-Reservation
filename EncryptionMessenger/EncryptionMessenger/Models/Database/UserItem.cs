@@ -11,6 +11,7 @@ namespace MessengerService.Models
         public string Username { get; set; }
         public string Hash { get; set; }
         public string Salt { get; set; }
+        public string DateAdded { get; set; }
 
         public UserItem Clone()
         {
@@ -19,6 +20,7 @@ namespace MessengerService.Models
             item.Username = this.Username;
             item.Hash = this.Hash;
             item.Salt = this.Salt;
+            item.DateAdded = this.DateAdded;
             return item;
         }
     }
