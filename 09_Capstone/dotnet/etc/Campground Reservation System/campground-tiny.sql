@@ -1,7 +1,17 @@
-DROP TABLE reservation;
-DROP TABLE site;
-DROP TABLE campground;
-DROP TABLE park;
+USE master;
+GO
+
+DROP DATABASE IF EXISTS npcampground;
+GO
+
+CREATE DATABASE npcampground;
+GO
+
+USE npcampground;
+GO
+
+
+BEGIN TRANSACTION;
 
 CREATE TABLE park (
   park_id integer identity NOT NULL,
@@ -209,3 +219,4 @@ ALTER TABLE campground ADD FOREIGN KEY (park_id) REFERENCES park(park_id);
 ALTER TABLE site ADD FOREIGN KEY (campground_id) REFERENCES campground(campground_id);
 ALTER TABLE reservation ADD FOREIGN KEY (site_id) REFERENCES site(site_id);
 
+commit transaction;
