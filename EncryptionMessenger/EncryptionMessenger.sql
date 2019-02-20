@@ -151,8 +151,8 @@ GO
 
 CREATE TABLE [dbo].[user](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[first_name] [varchar](30) NOT NULL,
-	[last_name] [varchar](30) NOT NULL,
+	--[first_name] [varchar](30) NOT NULL,
+	--[last_name] [varchar](30) NOT NULL,
 	[date_added] [datetime] NOT NULL,
 	[username] [varchar](30) NOT NULL,
 	[hash_string] [varchar](64) NOT NULL,
