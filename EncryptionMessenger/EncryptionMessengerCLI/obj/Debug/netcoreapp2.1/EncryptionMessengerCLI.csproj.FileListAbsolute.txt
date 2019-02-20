@@ -1,0 +1,14 @@
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\obj\Debug\netcoreapp2.1\EncryptionMessengerCLI.csprojAssemblyReference.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\obj\Debug\netcoreapp2.1\EncryptionMessengerCLI.csproj.CoreCompileInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\obj\Debug\netcoreapp2.1\EncryptionMessengerCLI.AssemblyInfoInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\obj\Debug\netcoreapp2.1\EncryptionMessengerCLI.AssemblyInfo.cs
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\bin\Debug\netcoreapp2.1\EncryptionMessengerCLI.deps.json
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\bin\Debug\netcoreapp2.1\EncryptionMessengerCLI.runtimeconfig.json
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\bin\Debug\netcoreapp2.1\EncryptionMessengerCLI.runtimeconfig.dev.json
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\bin\Debug\netcoreapp2.1\EncryptionMessengerCLI.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\bin\Debug\netcoreapp2.1\EncryptionMessengerCLI.pdb
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\bin\Debug\netcoreapp2.1\EncryptionMessenger.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\bin\Debug\netcoreapp2.1\EncryptionMessenger.pdb
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\obj\Debug\netcoreapp2.1\EncryptionMessengerCLI.csproj.CopyComplete
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\obj\Debug\netcoreapp2.1\EncryptionMessengerCLI.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessengerCLI\obj\Debug\netcoreapp2.1\EncryptionMessengerCLI.pdb

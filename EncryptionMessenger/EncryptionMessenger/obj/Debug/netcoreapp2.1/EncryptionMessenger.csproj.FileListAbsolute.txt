@@ -1,0 +1,9 @@
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\obj\Debug\netcoreapp2.1\EncryptionMessenger.csprojAssemblyReference.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\obj\Debug\netcoreapp2.1\EncryptionMessenger.csproj.CoreCompileInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\obj\Debug\netcoreapp2.1\EncryptionMessenger.AssemblyInfoInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\obj\Debug\netcoreapp2.1\EncryptionMessenger.AssemblyInfo.cs
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\bin\Debug\netcoreapp2.1\EncryptionMessenger.deps.json
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\bin\Debug\netcoreapp2.1\EncryptionMessenger.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\bin\Debug\netcoreapp2.1\EncryptionMessenger.pdb
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\obj\Debug\netcoreapp2.1\EncryptionMessenger.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\EncryptionMessenger\EncryptionMessenger\obj\Debug\netcoreapp2.1\EncryptionMessenger.pdb
