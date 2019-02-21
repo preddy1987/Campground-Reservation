@@ -874,7 +874,7 @@
       ]
     },
     "runtime.native.System.Data.SqlClient.sni/4.5.0": {
-      "sha512": "AJfX7owAAkMjWQYhoml5IBfXh8UyYPjktn8pK0BFGAdKgBS7HqMz1fw5vdzfZUWfhtTPDGCjgNttt46ZyEmSjg==",
+      "sha512": "X4hp5h5M2plTWZnUd79d0x4actSMj9L3Hv6e1Lu+oGi35XSaXg21ha4Rqmt2KrIesfUwMfpET8QhMkS1eiWqRQ==",
       "type": "package",
       "path": "runtime.native.system.data.sqlclient.sni/4.5.0",
       "files": [
@@ -934,7 +934,7 @@
       ]
     },
     "System.Data.SqlClient/4.6.0": {
-      "sha512": "gwItUWW1BMCckicFO85c8frFaMK8SGqYn5IeA3GSX4Lmid+CjXETfoHz7Uv+Vx6L0No7iRc/7cBL8gd6o9k9/g==",
+      "sha512": "DLhg881ETdy/OmlbBCjfXGVU2Xlm9x5yHwhcl33SAfCIG05hAbgMcvHUZruIG1sBJolGzDhes7R7hAKPS1SOqw==",
       "type": "package",
       "path": "system.data.sqlclient/4.6.0",
       "files": [
@@ -1175,23 +1175,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\preddy\\.nuget\\packages\\": {},
+    "C:\\Users\\jwolford\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\workspace\\Pair Exercises\\week-6-pair-exercises-c-team-4\\EncryptionMessenger\\EncryptionMessenger\\EncryptionMessenger.csproj",
+      "projectUniqueName": "C:\\workspace\\team\\week-6-pair-exercises-c-team-4\\EncryptionMessenger\\EncryptionMessenger\\EncryptionMessenger.csproj",
       "projectName": "EncryptionMessenger",
-      "projectPath": "C:\\workspace\\Pair Exercises\\week-6-pair-exercises-c-team-4\\EncryptionMessenger\\EncryptionMessenger\\EncryptionMessenger.csproj",
-      "packagesPath": "C:\\Users\\preddy\\.nuget\\packages\\",
-      "outputPath": "C:\\workspace\\Pair Exercises\\week-6-pair-exercises-c-team-4\\EncryptionMessenger\\EncryptionMessenger\\obj\\",
+      "projectPath": "C:\\workspace\\team\\week-6-pair-exercises-c-team-4\\EncryptionMessenger\\EncryptionMessenger\\EncryptionMessenger.csproj",
+      "packagesPath": "C:\\Users\\jwolford\\.nuget\\packages\\",
+      "outputPath": "C:\\workspace\\team\\week-6-pair-exercises-c-team-4\\EncryptionMessenger\\EncryptionMessenger\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\preddy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jwolford\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
