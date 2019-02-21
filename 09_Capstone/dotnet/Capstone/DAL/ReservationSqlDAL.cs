@@ -84,7 +84,7 @@ namespace NatParkCampRes.DAL
         /// <returns>boolean; true if add succeeded,  false if add failed</returns>
         public bool AddReservation(Reservation reserve)
         {
-            bool result = true;
+            bool result = false;
             try
             {
                 //Create a SqlConnection to our database
@@ -92,7 +92,21 @@ namespace NatParkCampRes.DAL
                 {
                     connection.Open();
                     SqlCommand cmd = new SqlCommand(SqlInsertReservation, connection);
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@SiteId", reserve.SiteId);
+                    cmd.Parameters.AddWithValue("@Name", reserve.Name);
+                    cmd.Parameters.AddWithValue("@FromDate", reserve.FromDate);
+                    cmd.Parameters.AddWithValue("@ToDate", reserve.ToDate);
+                    cmd.Parameters.AddWithValue("@ToDate", reserve.CreateDate);
+                    int rows = cmd.ExecuteNonQuery();
+                    if ( rows != 0)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                  
                 }
             }
             catch (SqlException ex)
