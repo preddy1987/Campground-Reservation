@@ -6,12 +6,12 @@ using System.Data.SqlClient;
 
 namespace NatParkCampRes.DAL
 {
-    public class ReservationSqlDAL
+    class ParkSiteSearchSqlDAL
     {
         #region Constants
-        private const string SqlSelectAllReservations = "SELECT * FROM reservation;";
-        private const string SqlInsertReservation = "INSERT INTO reservation (site_id,name,from_date,to_date,create_date)" +
-                                                    " VALUES (@SiteId,@Name,@FromDate,@ToDate,@CreateDate);";
+        private const string SqlSelectAllParkSites = "SELECT campground.name,site.site_id,site.site_number,site.max_occupancy," +
+                                                        "site.accessible,site.max_rv_length,site.utilities "+
+                                                        " FROM campground JOIN site ON campground.campground_id = site.campground_id;";
         #endregion
 
         #region Member Variables
@@ -24,7 +24,7 @@ namespace NatParkCampRes.DAL
         /// 
         /// </summary>
         /// <param name="connectionString"></param>
-        public ReservationSqlDAL(string connectionString)
+        public ParkSiteSearchSqlDAL(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -35,7 +35,7 @@ namespace NatParkCampRes.DAL
         /// 
         /// </summary>
         /// <returns></returns>
-        public IList<Reservation> GetAllReservations()
+        public IList<Reservation> GetAllSitesInPark(Park park)
         {
             List<Reservation> output = new List<Reservation>();
 
@@ -46,27 +46,11 @@ namespace NatParkCampRes.DAL
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand(SqlSelectAllReservations, connection);
-
+                    SqlCommand cmd = new SqlCommand(SqlSelectAllParkSites, connection);
+                    cmd.ExecuteNonQuery();
                     // Execute the query to the database
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    // The results come back as a SqlDataReader. Loop through each of the rows
-                    // and add to the output list
-                    while (reader.Read())
-                    {
-                        // Read in the value from the reader
-                        // Reference by index or by column_name
-                        Reservation reservation = new Reservation();
-                        reservation.ReservationId = Convert.ToInt32(reader["reservation_id"]);
-                        reservation.SiteId = Convert.ToInt32(reader["site_id"]);
-                        reservation.Name = Convert.ToString(reader["name"]);
-                        reservation.FromDate = Convert.ToDateTime(reader["from_date"]);
-                        reservation.ToDate = Convert.ToDateTime(reader["to_date"]);
-                        reservation.CreateDate = Convert.ToDateTime(reader["create_date"]);
-
-                        // Add the department to the output list                       
-                        output.Add(reservation);
                     }
                 }
             }
@@ -75,7 +59,6 @@ namespace NatParkCampRes.DAL
                 // A SQL Exception Occurred. Log and throw to our application!!
                 throw;
             }
-            return output;
         }
 
         /// <summary>
