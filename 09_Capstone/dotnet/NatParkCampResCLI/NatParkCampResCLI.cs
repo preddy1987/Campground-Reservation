@@ -1,6 +1,7 @@
 ﻿using System;
 using NatParkCampRes.DAL;
 using NatParkCampRes;
+using NatParkCampRes.Models;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,11 +20,11 @@ namespace NatParkCampResCLI
                 PrintHeader();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("View Park\n Select a Park for Further Details");
-                Console.WriteLine("1) Player Management");
-                Console.WriteLine("2) Leader Board");
-                Console.WriteLine("3) Start Game");
-                Console.WriteLine("4) Change Font");
-                Console.WriteLine("5) Quit");
+                Console.WriteLine($"1) Park 1");
+                Console.WriteLine($"2) Park 2");
+                Console.WriteLine($"3) Park 3");
+                Console.WriteLine("4) Quit");
+
                 Console.WriteLine();
 
                 int selection = CLIHelper.GetSingleInteger("Select an option...", 1, 5);
@@ -42,13 +43,8 @@ namespace NatParkCampResCLI
                 }
                 else if (selection == 4)
                 {
-                   // FontMenu();
-                }
-                else if (selection == 5)
-                {
                     quit = true;
                 }
-
             }
         }
 
