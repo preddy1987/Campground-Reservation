@@ -1,0 +1,5 @@
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\NatParkCampResCLI\bin\Debug\netcoreapp2.1\NatParkCampRes.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\NatParkCampResCLI\obj\Debug\netcoreapp2.1\NatParkCampResCLI.csproj.CoreCompileInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\NatParkCampResCLI\obj\Debug\netcoreapp2.1\NatParkCampResCLI.AssemblyInfoInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\NatParkCampResCLI\obj\Debug\netcoreapp2.1\NatParkCampResCLI.AssemblyInfo.cs
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\NatParkCampResCLI\obj\Debug\netcoreapp2.1\NatParkCampResCLI.csprojAssemblyReference.cache
