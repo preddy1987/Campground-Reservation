@@ -57,7 +57,7 @@ namespace NatParkCampRes.DAL
                         // Read in the value from the reader
                         // Reference by index or by column_name
                         Site site = new Site();
-                        site.SiteId = Convert.ToInt32(reader["site_id"]);
+                        site.Id = Convert.ToInt32(reader["site_id"]);
                         site.CampgroundId = Convert.ToInt32(reader["campground_id"]);
                         site.SiteNumber = Convert.ToInt32(reader["site_number"]);
                         site.MaxOccupants = Convert.ToInt32(reader["max_occupancy"]);

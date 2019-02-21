@@ -83,7 +83,7 @@ namespace NatParkCampRes.DAL
         /// 
         /// </summary>
         /// <returns></returns>
-        public IList<Campground> GetCampgroundsInPark()
+        public IList<Campground> GetCampgroundsInPark(Park park)
         {
             List<Campground> output = new List<Campground>();
 
@@ -119,13 +119,13 @@ namespace NatParkCampRes.DAL
                         output.Add(campground);
                     }
                 }
+                return output;
             }
             catch (SqlException ex)
             {
                 // A SQL Exception Occurred. Log and throw to our application!!
                 throw;
             }
-            return output;
         }
         #endregion
     }
