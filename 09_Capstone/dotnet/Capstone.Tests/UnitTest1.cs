@@ -7,7 +7,7 @@ namespace Capstone.Tests
     {
         [TestMethod]
         public void TestMethod1()
-        {
+        {           
         }
     }
 }
