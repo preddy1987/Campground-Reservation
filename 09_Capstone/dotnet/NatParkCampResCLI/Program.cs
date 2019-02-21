@@ -17,7 +17,7 @@ namespace NatParkCampResCLI
 
             string connectionString = configuration.GetConnectionString("Project");
 
-            NatParkCampResCLI cli = new NatParkCampResCLI();
+            NatParkCampResCLI cli = new NatParkCampResCLI(connectionString);
             cli.MainMenu();
         }
     }

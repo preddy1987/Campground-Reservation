@@ -6,7 +6,7 @@ using NatParkCampRes.Models;
 
 namespace NatParkCampRes.DAL
 {
-    class ParksSqlDAL
+   public class ParksSqlDAL
     {
         #region Constants
         private const string SqlSelectAllParks = "SELECT * FROM park;";

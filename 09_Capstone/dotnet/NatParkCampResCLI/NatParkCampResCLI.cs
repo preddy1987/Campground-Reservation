@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NatParkCampRes.DAL;
 using NatParkCampRes;
 using NatParkCampRes.Models;
@@ -9,10 +10,17 @@ namespace NatParkCampResCLI
 {
     public class NatParkCampResCLI
     {
+        private string connectionString { get; set; }
+        
 
+        public NatParkCampResCLI(string connectionStringDb)
+        {
+            connectionString = connectionStringDb;
+        }
+        
         public void MainMenu()
         {
-            
+            ParksSqlDAL parkSqlDal = new ParksSqlDAL(connectionString);
             bool quit = false;
             
             while (!quit)
@@ -20,9 +28,13 @@ namespace NatParkCampResCLI
                 PrintHeader();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("View Park\n Select a Park for Further Details");
-                Console.WriteLine($"1) Park 1");
-                Console.WriteLine($"2) Park 2");
-                Console.WriteLine($"3) Park 3");
+                IList<Park> parkList = parkSqlDal.GetAllParks();
+
+                foreach(var park in parkList)
+                {
+                    Console.WriteLine($"{park.Id}) {park.Name}");
+                }
+
                 Console.WriteLine("4) Quit");
 
                 Console.WriteLine();
