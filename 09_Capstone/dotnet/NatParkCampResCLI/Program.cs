@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace NatParkCampRes
+namespace NatParkCampResCLI
 {
     class Program
     {
@@ -16,6 +16,9 @@ namespace NatParkCampRes
             IConfigurationRoot configuration = builder.Build();
 
             string connectionString = configuration.GetConnectionString("Project");
+
+            NatParkCampResCLI cli = new NatParkCampResCLI();
+            cli.MainMenu();
         }
     }
 }
