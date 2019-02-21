@@ -1,0 +1,10 @@
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\bin\Debug\netcoreapp2.1\appsettings.json
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\bin\Debug\netcoreapp2.1\NatParkCampRes.deps.json
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\bin\Debug\netcoreapp2.1\NatParkCampRes.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\bin\Debug\netcoreapp2.1\NatParkCampRes.pdb
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\obj\Debug\netcoreapp2.1\NatParkCampRes.csprojAssemblyReference.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\obj\Debug\netcoreapp2.1\NatParkCampRes.csproj.CoreCompileInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\obj\Debug\netcoreapp2.1\NatParkCampRes.AssemblyInfoInputs.cache
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\obj\Debug\netcoreapp2.1\NatParkCampRes.AssemblyInfo.cs
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\obj\Debug\netcoreapp2.1\NatParkCampRes.dll
+C:\workspace\Pair Exercises\week-6-pair-exercises-c-team-4\09_Capstone\dotnet\Capstone\obj\Debug\netcoreapp2.1\NatParkCampRes.pdb
