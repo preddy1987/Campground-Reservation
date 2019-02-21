@@ -20,8 +20,9 @@ namespace NatParkCampRes.DAL
 
         #region Constructor
         /// <summary>
-        /// 
+        /// Campground DAL Constructor
         /// </summary>
+        /// <remarks> </remarks>
         /// <param name="connectionString"></param>
         public CampgroundSqlDAL(string connectionString)
         {
