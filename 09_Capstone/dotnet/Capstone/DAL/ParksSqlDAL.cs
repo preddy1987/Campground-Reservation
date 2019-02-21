@@ -8,23 +8,31 @@ namespace NatParkCampRes.DAL
 {
     class ParksSqlDAL
     {
-        private string connectionString;
+        #region Constants
         private const string SqlSelectAllParks = "SELECT * FROM park;";
-        //private const string SqlGetLastDepartmentId = "SELECT MAX(department_id) FROM department;";
-        //private const string SqlUpdateDepartment = "UPDATE department SET name = @name WHERE department_id = @id;";
-        //private const string SqlInsertDepartment = "INSERT INTO department VALUES (@name);";
-        //private const string SqlGetADepartment = "Select * from department where department_id = @id;";
+        #endregion
 
-        // Single Parameter Constructor
+        #region Member Variables
+        private string _connectionString;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbConnectionString"></param>
         public ParksSqlDAL(string dbConnectionString)
         {
-            connectionString = dbConnectionString;
+            _connectionString = dbConnectionString;
         }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Returns a list of all of the departments.
         /// </summary>
         /// <returns></returns>
-        public IList<Park> GetDepartments()
+        public IList<Park> GetAllParks()
         {
             List<Park> output = new List<Park>();
 
@@ -32,7 +40,7 @@ namespace NatParkCampRes.DAL
             try
             {
                 //Create a SqlConnection to our database
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     connection.Open();
                     SqlCommand cmd = new SqlCommand(SqlSelectAllParks, connection);
@@ -67,5 +75,6 @@ namespace NatParkCampRes.DAL
             }
             return output;
         }
+        #endregion
     }
 }
