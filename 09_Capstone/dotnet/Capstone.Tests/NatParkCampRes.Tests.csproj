@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Capstone\Capstone.csproj" />
+    <ProjectReference Include="..\Capstone\NatParkCampRes.csproj" />
   </ItemGroup>
 
 </Project>
