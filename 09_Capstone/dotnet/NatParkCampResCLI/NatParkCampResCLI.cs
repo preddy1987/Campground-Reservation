@@ -141,14 +141,22 @@ namespace NatParkCampResCLI
         }
         private void DisplayReservationMenu(Park park)
         {
-            PrintHeader();
-            List<Campground> campList = DisplayCampgroundInfo(park);
-            Console.WriteLine();
-            int selection = CLIHelper.GetSingleInteger("Which campground (enter 0 to cancel)?", 0, campList.Count);
-            DateTime arrivalDate = CLIHelper.GetDateTime("\nWhat is the arrival date?");
-            DateTime departDate = CLIHelper.GetDateTime("What is the departure date?");
-            Console.WriteLine();
-            SiteSelectionMenu(selection,arrivalDate,departDate);
+            bool quit = false;
+            while (!quit)
+            {
+                PrintHeader();
+                List<Campground> campList = DisplayCampgroundInfo(park);
+                Console.WriteLine();
+                int selection = CLIHelper.GetSingleInteger("Which campground (enter 0 to cancel)?", 0, campList.Count);
+                if (selection == 0)
+                {
+                    MainMenu();
+                }
+                DateTime arrivalDate = CLIHelper.GetDateTime("\nWhat is the arrival date?");
+                DateTime departDate = CLIHelper.GetDateTime("What is the departure date?");
+                Console.WriteLine();
+                SiteSelectionMenu(selection, arrivalDate, departDate);
+            }
         }
         private void SiteSelectionMenu(int campgroundId,DateTime arrival,DateTime departure)
         {
