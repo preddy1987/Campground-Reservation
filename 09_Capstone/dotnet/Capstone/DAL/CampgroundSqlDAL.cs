@@ -35,7 +35,7 @@ namespace NatParkCampRes.DAL
         /// 
         /// </summary>
         /// <returns></returns>
-        public IList<Campground> GetALLCampgrounds()
+        public List<Campground> GetAllCampgrounds()
         {
             List<Campground> output = new List<Campground>();
 
@@ -47,6 +47,7 @@ namespace NatParkCampRes.DAL
                 {
                     connection.Open();
                     SqlCommand cmd = new SqlCommand(SqlSelectAllCampgrounds, connection);
+                    
 
                     // Execute the query to the database
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -83,7 +84,7 @@ namespace NatParkCampRes.DAL
         /// 
         /// </summary>
         /// <returns></returns>
-        public IList<Campground> GetCampgroundsInPark(Park park)
+        public List<Campground> GetCampgroundsInPark(Park park)
         {
             List<Campground> output = new List<Campground>();
 
@@ -95,9 +96,10 @@ namespace NatParkCampRes.DAL
                 {
                     connection.Open();
                     SqlCommand cmd = new SqlCommand(SqlSelectCampgroundsInPark, connection);
-
+                    cmd.Parameters.AddWithValue("@ParkId", park.Id);
                     // Execute the query to the database
                     SqlDataReader reader = cmd.ExecuteReader();
+                    
 
                     // The results come back as a SqlDataReader. Loop through each of the rows
                     // and add to the output list

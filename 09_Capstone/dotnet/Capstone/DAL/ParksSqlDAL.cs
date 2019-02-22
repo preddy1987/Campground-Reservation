@@ -9,7 +9,7 @@ namespace NatParkCampRes.DAL
    public class ParksSqlDAL
     {
         #region Constants
-        private const string SqlSelectAllParks = "SELECT * FROM park;";
+        private const string SqlSelectAllParks = "SELECT * FROM park order by name;";
         #endregion
 
         #region Member Variables
@@ -32,7 +32,7 @@ namespace NatParkCampRes.DAL
         /// Returns a list of all of the parks.
         /// </summary>
         /// <returns></returns>
-        public IList<Park> GetAllParks()
+        public List<Park> GetAllParks()
         {
             List<Park> output = new List<Park>();
 

@@ -84,6 +84,42 @@ namespace NatParkCampResCLI
             return intValue;
 
         }
+        public static int GetSingleIntegerOrQ(string message, int startRange, int endRange)
+        {
+            string userInput = String.Empty;
+            int intValue = 0;
+            int numberOfAttempts = 0;
+
+            bool exit = false;
+            do
+            {
+                if (numberOfAttempts > 0)
+                {
+                    Console.WriteLine($"\nInvalid input format. Selection must be a number between { startRange} and { endRange}.");
+                }
+
+                Console.Write(message + " ");
+                userInput = Console.ReadKey(true).KeyChar.ToString().ToLower();
+                numberOfAttempts++;
+                if (userInput == "q")
+                {
+                    intValue = -1;
+                    exit = true;
+                }
+                else if (int.TryParse(userInput, out intValue))
+                {
+                    if (intValue >= startRange && intValue <= endRange)
+                    {
+                        exit = true;
+                    }
+                }
+            }
+            while (!exit);
+
+            return intValue;
+
+        }
+
 
         public static double GetDouble(string message)
         {
