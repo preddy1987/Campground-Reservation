@@ -166,32 +166,27 @@ namespace NatParkCampResCLI
             SiteSqlDAL siteSqlDAL = new SiteSqlDAL(connectionString);
             List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
             Console.WriteLine("Results Matching Your Search Criteria");
-            Console.WriteLine("Site No." + "Max Occup." + "Accessible?" + "Max RV Length" + "Utility" + "Cost");
+            Console.WriteLine(  "Site No.".PadRight(12) + 
+                                "Max Occup.".PadRight(12) +
+                                "Accessible?".PadRight(15) +
+                                "Max RV Length".PadRight(15) +
+                                "Utility".PadRight(12) +
+                                "Cost");
 
             TimeSpan interval = departure - arrival;
             decimal cost = interval.Days * campground.DailyFee;
 
             for (int i = 0; i < siteList.Count; i++)
             {
-                string accessbility = "";
-                string utilites = "";
-                if (siteList[i].HasUtilities)
-                {
-                    utilites = "Yes";
-                }
-                else
-                {
-                    utilites = "N/A";
-                }
-                if (siteList[i].IsAccessible)
-                {
-                    accessbility = "Yes";
-                }
-                else
-                {
-                    accessbility = "No";
-                }
-                    Console.WriteLine($"{siteList[i].SiteNumber}{siteList[i].MaxOccupants}{accessbility}{siteList[i].MaxRvLength}{utilites}{cost.ToString("C2")}");
+                string utilities = siteList[i].HasUtilities ? "Yes" :"N/A";
+                string accessability = siteList[i].HasUtilities ? "Yes" : "No";
+                string rvStatus = siteList[i].MaxRvLength == 0 ? "N/A" : siteList[i].MaxRvLength.ToString();
+                Console.WriteLine(  $"{siteList[i].SiteNumber.ToString().PadRight(12)}"+
+                                    $"{siteList[i].MaxOccupants.ToString().PadRight(12)}"+
+                                    $"{accessability}".PadRight(15) +
+                                    $"{rvStatus.PadRight(15)}"+
+                                    $"{utilities}".PadRight(12) +
+                                    $"{cost.ToString("C2")}");
             }
             Console.ReadKey();
         }
