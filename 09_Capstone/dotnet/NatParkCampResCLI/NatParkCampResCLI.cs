@@ -148,10 +148,12 @@ namespace NatParkCampResCLI
             DateTime arrivalDate = CLIHelper.GetDateTime("\nWhat is the arrival date?");
             DateTime departDate = CLIHelper.GetDateTime("What is the departure date?");
             Console.WriteLine();
-            SiteSelectionMenu();
+            SiteSelectionMenu(selection,arrivalDate,departDate);
         }
-        private void SiteSelectionMenu()
+        private void SiteSelectionMenu(int campgroundId,DateTime arrival,DateTime departure)
         {
+            Console.WriteLine("Results Matching Your Search Criteria");
+            Console.WriteLine("Site No." + "Max Occup." + "Accessible?" + "Max RV Length" + "Utility" + "Cost");
 
         }
         private void PrintHeader()
