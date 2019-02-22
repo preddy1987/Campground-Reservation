@@ -6,12 +6,12 @@ using System.Data.SqlClient;
 
 namespace NatParkCampRes.DAL
 {
-    class SiteSqlDAL
+    public class SiteSqlDAL
     {
 
         #region Constants
         private const string SqlSelectAllSites = "SELECT * FROM site;";
-        private const string SqlSelectCampgroundSites = "Select * from site WHERE  campground_id = @CampGround;";
+        private const string SqlSelectCampgroundSites = "Select TOP 5 * from site WHERE campground_id = @CampGround;";
         #endregion
 
         #region Member Variables
@@ -64,7 +64,7 @@ namespace NatParkCampRes.DAL
                         site.MaxOccupants = Convert.ToInt32(reader["max_occupancy"]);
                         site.IsAccessible = Convert.ToBoolean(reader["accessible"]);
                         site.MaxRvLength = Convert.ToInt32(reader["max_rv_length"]);
-                        site.IsAccessible = Convert.ToBoolean(reader["utilities"]);
+                        site.HasUtilities = Convert.ToBoolean(reader["utilities"]);
 
                         // Add the department to the output list                       
                         output.Add(site);
@@ -78,7 +78,7 @@ namespace NatParkCampRes.DAL
             }
             return output;
         }
-        public List<Site> GetAllCampgroundSites(Campground camp)
+        public List<Site> GetAllCampgroundSites(int campgroundId)
         {
             List<Site> output = new List<Site>();
 
@@ -89,8 +89,8 @@ namespace NatParkCampRes.DAL
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand(SqlSelectAllSites, connection);
-                    cmd.Parameters.AddWithValue("@CampGround", camp.CampgroundId);
+                    SqlCommand cmd = new SqlCommand(SqlSelectCampgroundSites, connection);
+                    cmd.Parameters.AddWithValue("@CampGround", campgroundId);
 
                     // Execute the query to the database
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -108,7 +108,7 @@ namespace NatParkCampRes.DAL
                         site.MaxOccupants = Convert.ToInt32(reader["max_occupancy"]);
                         site.IsAccessible = Convert.ToBoolean(reader["accessible"]);
                         site.MaxRvLength = Convert.ToInt32(reader["max_rv_length"]);
-                        site.IsAccessible = Convert.ToBoolean(reader["utilities"]);
+                        site.HasUtilities = Convert.ToBoolean(reader["utilities"]);
 
                         // Add the department to the output list                       
                         output.Add(site);

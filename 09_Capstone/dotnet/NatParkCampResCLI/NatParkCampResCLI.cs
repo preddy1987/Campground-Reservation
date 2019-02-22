@@ -123,7 +123,7 @@ namespace NatParkCampResCLI
         }
         private void DisplayCampgroundMenu(Park park)
         {
-            DisplayCampgroundInfo(park);
+            List<Campground> campList = DisplayCampgroundInfo(park);
             Console.WriteLine();
             Console.WriteLine("Select a Command");
             Console.WriteLine("1) Search for Available Reservation");
@@ -150,19 +150,50 @@ namespace NatParkCampResCLI
                 int selection = CLIHelper.GetSingleInteger("Which campground (enter 0 to cancel)?", 0, campList.Count);
                 if (selection == 0)
                 {
-                    MainMenu();
+                    quit = true;
                 }
-                DateTime arrivalDate = CLIHelper.GetDateTime("\nWhat is the arrival date?");
-                DateTime departDate = CLIHelper.GetDateTime("What is the departure date?");
-                Console.WriteLine();
-                SiteSelectionMenu(selection, arrivalDate, departDate);
+                else
+                {
+                    DateTime arrivalDate = CLIHelper.GetDateTime("\nWhat is the arrival date?");
+                    DateTime departDate = CLIHelper.GetDateTime("What is the departure date?");
+                    Console.WriteLine();
+                    SiteSelectionMenu(campList[selection - 1], arrivalDate, departDate);
+                }
             }
         }
-        private void SiteSelectionMenu(int campgroundId,DateTime arrival,DateTime departure)
+        private void SiteSelectionMenu(Campground campground,DateTime arrival,DateTime departure)
         {
+            SiteSqlDAL siteSqlDAL = new SiteSqlDAL(connectionString);
+            List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
             Console.WriteLine("Results Matching Your Search Criteria");
             Console.WriteLine("Site No." + "Max Occup." + "Accessible?" + "Max RV Length" + "Utility" + "Cost");
 
+            TimeSpan interval = departure - arrival;
+            decimal cost = interval.Days * campground.DailyFee;
+
+            for (int i = 0; i < siteList.Count; i++)
+            {
+                string accessbility = "";
+                string utilites = "";
+                if (siteList[i].HasUtilities)
+                {
+                    utilites = "Yes";
+                }
+                else
+                {
+                    utilites = "N/A";
+                }
+                if (siteList[i].IsAccessible)
+                {
+                    accessbility = "Yes";
+                }
+                else
+                {
+                    accessbility = "No";
+                }
+                    Console.WriteLine($"{siteList[i].SiteNumber}{siteList[i].MaxOccupants}{accessbility}{siteList[i].MaxRvLength}{utilites}{cost.ToString("C2")}");
+            }
+            Console.ReadKey();
         }
         private void PrintHeader()
         {
