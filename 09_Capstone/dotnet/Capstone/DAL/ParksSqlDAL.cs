@@ -111,7 +111,7 @@ namespace NatParkCampRes.DAL
                         park.Desc = Convert.ToString(reader["description"]);
 
                         // Add the department to the output list                       
-                        output.Add(park);
+                        //output.Add(park);
                     }
                 }
             }
