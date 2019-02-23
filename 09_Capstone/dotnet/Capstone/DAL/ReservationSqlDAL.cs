@@ -98,7 +98,7 @@ namespace NatParkCampRes.DAL
                     cmd.Parameters.AddWithValue("@Name", reserve.Name);
                     cmd.Parameters.AddWithValue("@FromDate", reserve.FromDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US")));
                     cmd.Parameters.AddWithValue("@ToDate", reserve.ToDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US")));
-                    cmd.Parameters.AddWithValue("@CreateDate", reserve.CreateDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US")));
+                    cmd.Parameters.AddWithValue("@CreateDate", reserve.CreateDate);
                     cmd.ExecuteNonQuery();
                     //int rows = cmd.ExecuteNonQuery();
                     //if ( rows != 0)

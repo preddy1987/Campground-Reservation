@@ -70,36 +70,40 @@ namespace NatParkCampResCLI
 
         private void DisplayParkInfo(Park park)
         {
-            PrintHeader();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Park Information");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"{park.Name}");
-            Console.WriteLine($"Location:         {park.Location}");
-            Console.WriteLine($"Established:      {park.EstablishDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))}");
-            Console.WriteLine($"Area:             {park.Area} sq km");
-            Console.WriteLine($"Annual Visitors:  {park.Visitors}");
-            Console.WriteLine();
-            Console.WriteLine($"{park.Desc}");
-            Console.WriteLine();
-            Console.WriteLine("Select a Command");
-            Console.WriteLine("1) View Campgrounds");
-            Console.WriteLine("2) Search for Reservation");
-            Console.WriteLine("3) Return to Previous Screen");
-
-            int selection = CLIHelper.GetSingleInteger("Select an option...", 1, 3);
-
-            if (selection == 1)
+            bool quit = false;
+            while (!quit)
             {
-                DisplayCampgroundMenu(park);
-            }
-            else if (selection == 2)
-            {
-                DisplayReservationMenu(park);
-            }
-            else if (selection == 3)
-            {
+                PrintHeader();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Park Information");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"{park.Name}");
+                Console.WriteLine($"Location:         {park.Location}");
+                Console.WriteLine($"Established:      {park.EstablishDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))}");
+                Console.WriteLine($"Area:             {park.Area} sq km");
+                Console.WriteLine($"Annual Visitors:  {park.Visitors}");
+                Console.WriteLine();
+                Console.WriteLine($"{park.Desc}");
+                Console.WriteLine();
+                Console.WriteLine("Select a Command");
+                Console.WriteLine("1) View Campgrounds");
+                Console.WriteLine("2) Search for Reservation");
+                Console.WriteLine("3) Return to Previous Screen");
 
+                int selection = CLIHelper.GetSingleInteger("Select an option...", 1, 3);
+
+                if (selection == 1)
+                {
+                    DisplayCampgroundMenu(park);
+                }
+                else if (selection == 2)
+                {
+                    DisplayReservationMenu(park);
+                }
+                else if (selection == 3)
+                {
+                    quit = true;
+                }
             }
         }
         private List<Campground> DisplayCampgroundInfo(Park park)
@@ -124,20 +128,24 @@ namespace NatParkCampResCLI
         }
         private void DisplayCampgroundMenu(Park park)
         {
-            List<Campground> campList = DisplayCampgroundInfo(park);
-            Console.WriteLine();
-            Console.WriteLine("Select a Command");
-            Console.WriteLine("1) Search for Available Reservation");
-            Console.WriteLine("2) Return to Previous Screen");
-
-            int selection = CLIHelper.GetSingleInteger("Select an option...", 1, 2);
-            if (selection == 1)
+            bool quit = false;
+            while (!quit)
             {
-                DisplayReservationMenu(park);
-            }
-            else if (selection == 2)
-            {
+                List<Campground> campList = DisplayCampgroundInfo(park);
+                Console.WriteLine();
+                Console.WriteLine("Select a Command");
+                Console.WriteLine("1) Search for Available Reservation");
+                Console.WriteLine("2) Return to Previous Screen");
 
+                int selection = CLIHelper.GetSingleInteger("Select an option...", 1, 2);
+                if (selection == 1)
+                {
+                    DisplayReservationMenu(park);
+                }
+                else if (selection == 2)
+                {
+                    quit = true;
+                }
             }
         }
         private void DisplayReservationMenu(Park park)
