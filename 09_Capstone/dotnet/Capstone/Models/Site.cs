@@ -4,8 +4,9 @@ using System.Text;
 
 namespace NatParkCampRes.Models
 {
-    public class Site : BaseItem
+    public class Site 
     {
+        public int SiteId { get; set; }
         public int CampgroundId { get; set; }
         public int SiteNumber { get; set; }
         public int MaxOccupants { get; set; }

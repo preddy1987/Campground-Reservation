@@ -48,7 +48,7 @@ namespace NatParkCampRes.DAL
                 {
                     connection.Open();
                     SqlCommand cmd = new SqlCommand(SqlSelectAllParkSites, connection);
-                    cmd.Parameters.AddWithValue("@ParkId", park.Id);
+                    cmd.Parameters.AddWithValue("@ParkId", park.ParkId);
 
                     // Execute the query to the database
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -60,9 +60,9 @@ namespace NatParkCampRes.DAL
                         // Read in the value from the reader
                         // Reference by index or by column_name
                         SiteReservation siteRes = new SiteReservation();
-                        siteRes.Name = Convert.ToString(reader["campground_name"]);
-                        siteRes.DailyFee = Convert.ToDecimal(reader["daily_fee"]);
-                        siteRes.Id = Convert.ToInt32(reader["site_id"]);
+//                        siteRes.R = Convert.ToString(reader["campground_name"]);
+//                        siteRes.DailyFee = Convert.ToDecimal(reader["daily_fee"]);
+                        siteRes.SiteId = Convert.ToInt32(reader["site_id"]);
                         siteRes.SiteNumber = Convert.ToInt32(reader["site_number"]);
                         siteRes.MaxOccupants = Convert.ToInt32(reader["max_occupancy"]);
                         siteRes.IsAccessible = Convert.ToBoolean(reader["accessible"]);

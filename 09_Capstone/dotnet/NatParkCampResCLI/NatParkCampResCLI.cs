@@ -4,6 +4,7 @@ using NatParkCampRes.DAL;
 using NatParkCampRes;
 using NatParkCampRes.Models;
 using System.Text;
+using System.Globalization;
 
 namespace NatParkCampResCLI
 {
@@ -75,7 +76,7 @@ namespace NatParkCampResCLI
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"{park.Name}");
             Console.WriteLine($"Location:         {park.Location}");
-            Console.WriteLine($"Established:      {park.EstablishDate}");
+            Console.WriteLine($"Established:      {park.EstablishDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))}");
             Console.WriteLine($"Area:             {park.Area} sq km");
             Console.WriteLine($"Annual Visitors:  {park.Visitors}");
             Console.WriteLine();
@@ -163,8 +164,11 @@ namespace NatParkCampResCLI
         }
         private void SiteSelectionMenu(Campground campground,DateTime arrival,DateTime departure)
         {
-            SiteSqlDAL siteSqlDAL = new SiteSqlDAL(connectionString);
-            List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
+            //SiteSqlDAL siteSqlDAL = new SiteSqlDAL(connectionString);
+            //List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
+            CampgroundSiteSearchSqlDAL reservationSqlDAL = new CampgroundSiteSearchSqlDAL(connectionString);
+            List<Site> resList = reservationSqlDAL.GetAvailalableSitesInCampground(campground.CampgroundId, arrival, departure);
+
             Console.WriteLine("Results Matching Your Search Criteria");
             Console.WriteLine(  "Site No.".PadRight(12) + 
                                 "Max Occup.".PadRight(12) +
@@ -175,21 +179,48 @@ namespace NatParkCampResCLI
 
             TimeSpan interval = departure - arrival;
             decimal cost = interval.Days * campground.DailyFee;
-
-            for (int i = 0; i < siteList.Count; i++)
+            if (resList.Count == 0)
             {
-                string utilities = siteList[i].HasUtilities ? "Yes" :"N/A";
-                string accessability = siteList[i].HasUtilities ? "Yes" : "No";
-                string rvStatus = siteList[i].MaxRvLength == 0 ? "N/A" : siteList[i].MaxRvLength.ToString();
-                Console.WriteLine(  $"{siteList[i].SiteNumber.ToString().PadRight(12)}"+
-                                    $"{siteList[i].MaxOccupants.ToString().PadRight(12)}"+
-                                    $"{accessability}".PadRight(15) +
-                                    $"{rvStatus.PadRight(15)}"+
-                                    $"{utilities}".PadRight(12) +
-                                    $"{cost.ToString("C2")}");
+                Console.WriteLine("No sites available for the dates provided.");
+            }
+            else
+            {
+                for (int i = 0; i < resList.Count; i++)
+                {
+                    string utilities = resList[i].HasUtilities ? "Yes" : "N/A";
+                    string accessability = resList[i].HasUtilities ? "Yes" : "No";
+                    string rvStatus = resList[i].MaxRvLength == 0 ? "N/A" : resList[i].MaxRvLength.ToString();
+                    Console.WriteLine($"{resList[i].SiteNumber.ToString().PadRight(12)}" +
+                                        $"{resList[i].MaxOccupants.ToString().PadRight(12)}" +
+                                        $"{accessability}".PadRight(15) +
+                                        $"{rvStatus.PadRight(15)}" +
+                                        $"{utilities}".PadRight(12) +
+                                        $"{cost.ToString("C2")}");
+                }
+                int resSiteId = 0;
+                int selection = CLIHelper.GetInteger("Which site should be reserved (enter 0 to cancel)?");
+                if (selection < 0)
+                {
+                    Console.WriteLine(" Invalid selection. Please try again.");
+                }
+                else
+                {
+                    for (int i = 0; i < resList.Count; i++)
+                    {
+                        if (resList[i].SiteNumber == selection)
+                        {
+                            resSiteId = resList[i].SiteId;
+                        }
+                    }
+                    if (resSiteId == 0)
+                    {
+                        Console.WriteLine(" Invalid selection. Please try again.");
+                    }
+                }
             }
             Console.ReadKey();
         }
+
         private void PrintHeader()
         {
             Console.Clear();

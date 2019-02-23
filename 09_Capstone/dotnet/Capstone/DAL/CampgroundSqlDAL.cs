@@ -59,7 +59,7 @@ namespace NatParkCampRes.DAL
                         // Read in the value from the reader
                         // Reference by index or by column_name
                         Campground campground = new Campground();
-                        campground.CampgroundId = Convert.ToInt32(reader["park_id"]);
+                        campground.CampgroundId = Convert.ToInt32(reader["campground_id"]);
                         campground.ParkId = Convert.ToInt32(reader["park_id"]);
                         campground.Name = Convert.ToString(reader["name"]);
                         campground.ParkId = Convert.ToInt32(reader["park_id"]);
@@ -96,7 +96,7 @@ namespace NatParkCampRes.DAL
                 {
                     connection.Open();
                     SqlCommand cmd = new SqlCommand(SqlSelectCampgroundsInPark, connection);
-                    cmd.Parameters.AddWithValue("@ParkId", park.Id);
+                    cmd.Parameters.AddWithValue("@ParkId", park.ParkId);
                     // Execute the query to the database
                     SqlDataReader reader = cmd.ExecuteReader();
                     
@@ -108,7 +108,7 @@ namespace NatParkCampRes.DAL
                         // Read in the value from the reader
                         // Reference by index or by column_name
                         Campground campground = new Campground();
-                        campground.CampgroundId = Convert.ToInt32(reader["park_id"]);
+                        campground.CampgroundId = Convert.ToInt32(reader["campground_id"]);
                         campground.ParkId = Convert.ToInt32(reader["park_id"]);
                         campground.Name = Convert.ToString(reader["name"]);
                         campground.ParkId = Convert.ToInt32(reader["park_id"]);

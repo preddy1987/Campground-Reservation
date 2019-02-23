@@ -6,7 +6,6 @@ namespace NatParkCampRes.Models
 {
     public class SiteReservation : Site
     {
-        public string Name { get; set; }
-        public decimal DailyFee { get; set; }
+        public int SiteReservationConflict { get; set; }
     }
 }

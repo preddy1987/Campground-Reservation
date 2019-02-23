@@ -4,8 +4,9 @@ using System.Text;
 
 namespace NatParkCampRes.Models
 {
-    public class Park : BaseItem
-    {
+    public class Park
+    { 
+        public int ParkId { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
         public DateTime EstablishDate { get; set; }

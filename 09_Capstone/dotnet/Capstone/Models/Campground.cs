@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NatParkCampRes.Models
 {
-    public class Campground : BaseItem
+    public class Campground 
     {
         public int CampgroundId { get; set; }
         public int ParkId { get; set; }

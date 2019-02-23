@@ -55,7 +55,7 @@ namespace NatParkCampRes.DAL
                         // Read in the value from the reader
                         // Reference by index or by column_name
                         Park park = new Park();
-                        park.Id = Convert.ToInt32(reader["park_id"]);
+                        park.ParkId= Convert.ToInt32(reader["park_id"]);
                         park.Name = Convert.ToString(reader["name"]);
                         park.Location = Convert.ToString(reader["location"]);
                         park.EstablishDate = Convert.ToDateTime(reader["establish_date"]);
@@ -102,7 +102,7 @@ namespace NatParkCampRes.DAL
                         // Read in the value from the reader
                         // Reference by index or by column_name
                         Park park = new Park();
-                        park.Id = Convert.ToInt32(reader["park_id"]);
+                        park.ParkId = Convert.ToInt32(reader["park_id"]);
                         park.Name = Convert.ToString(reader["name"]);
                         park.Location = Convert.ToString(reader["location"]);
                         park.EstablishDate = Convert.ToDateTime(reader["establish_date"]);

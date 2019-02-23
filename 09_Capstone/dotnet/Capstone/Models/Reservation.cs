@@ -4,8 +4,8 @@ using System.Text;
 
 namespace NatParkCampRes.Models
 {
-    public class Reservation :BaseItem
-    {
+    public class Reservation
+    { 
         public int ReservationId { get; set; }
         public int SiteId { get; set; }
         public string Name { get; set; }
