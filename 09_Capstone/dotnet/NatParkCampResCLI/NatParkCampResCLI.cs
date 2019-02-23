@@ -230,8 +230,8 @@ namespace NatParkCampResCLI
                     Console.WriteLine("What name Should the reservation be made under?");
                     reserve.Name = Console.ReadLine();
                     ReservationSqlDAL reservationSqlDAL = new ReservationSqlDAL(connectionString);
-                    reservationSqlDAL.AddReservation(reserve);
-                    Console.WriteLine("you have successfully completed your reservation.\n Press any key to go back");
+                    reserve = reservationSqlDAL.AddReservation(reserve);
+                    Console.WriteLine($"The reservation has been made and the confirmation id is {reserve.ReservationId}");
                     Console.ReadKey();
                     quit = true;
                 }
