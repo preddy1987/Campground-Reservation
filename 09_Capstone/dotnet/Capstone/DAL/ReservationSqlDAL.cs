@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NatParkCampRes.Models;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace NatParkCampRes.DAL
 {
@@ -12,6 +13,7 @@ namespace NatParkCampRes.DAL
         private const string SqlSelectAllReservations = "SELECT * FROM reservation;";
         private const string SqlInsertReservation = "INSERT INTO reservation (site_id,name,from_date,to_date,create_date)" +
                                                     " VALUES (@SiteId,@Name,@FromDate,@ToDate,@CreateDate);";
+        private const string SqlGetLastReservationId = "SELECT MAX(reservation_id) FROM reservation;";
         #endregion
 
         #region Member Variables
@@ -35,7 +37,7 @@ namespace NatParkCampRes.DAL
         /// 
         /// </summary>
         /// <returns></returns>
-        public IList<Reservation> GetAllReservations()
+        public List<Reservation> GetAllReservations()
         {
             List<Reservation> output = new List<Reservation>();
 
@@ -82,7 +84,7 @@ namespace NatParkCampRes.DAL
         /// add new reservation
         /// </summary>
         /// <returns>boolean; true if add succeeded,  false if add failed</returns>
-        public bool AddReservation(Reservation reserve)
+        public Reservation AddReservation(Reservation reserve)
         {
             bool result = false;
             try
@@ -94,27 +96,30 @@ namespace NatParkCampRes.DAL
                     SqlCommand cmd = new SqlCommand(SqlInsertReservation, connection);
                     cmd.Parameters.AddWithValue("@SiteId", reserve.SiteId);
                     cmd.Parameters.AddWithValue("@Name", reserve.Name);
-                    cmd.Parameters.AddWithValue("@FromDate", reserve.FromDate);
-                    cmd.Parameters.AddWithValue("@ToDate", reserve.ToDate);
-                    cmd.Parameters.AddWithValue("@ToDate", reserve.CreateDate);
-                    int rows = cmd.ExecuteNonQuery();
-                    if ( rows != 0)
-                    {
-                        result = true;
-                    }
-                    else
-                    {
-                        result = false;
-                    }
-                  
+                    cmd.Parameters.AddWithValue("@FromDate", reserve.FromDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US")));
+                    cmd.Parameters.AddWithValue("@ToDate", reserve.ToDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US")));
+                    cmd.Parameters.AddWithValue("@CreateDate", reserve.CreateDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US")));
+                    cmd.ExecuteNonQuery();
+                    //int rows = cmd.ExecuteNonQuery();
+                    //if ( rows != 0)
+                    //{
+                    //    result = true;
+                    //}
+                    //else
+                    //{
+                    //    result = false;
+                    //}
+                    cmd = new SqlCommand(SqlGetLastReservationId, connection);
+                    reserve.ReservationId = Convert.ToInt32(cmd.ExecuteScalar());
                 }
+                
             }
             catch (SqlException ex)
             {
                 // A SQL Exception Occurred. Log and throw to our application!!
                 throw;
             }
-            return result;
+            return reserve;
         }
         #endregion
     }

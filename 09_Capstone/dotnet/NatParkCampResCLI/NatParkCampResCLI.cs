@@ -164,61 +164,79 @@ namespace NatParkCampResCLI
         }
         private void SiteSelectionMenu(Campground campground,DateTime arrival,DateTime departure)
         {
-            //SiteSqlDAL siteSqlDAL = new SiteSqlDAL(connectionString);
-            //List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
-            CampgroundSiteSearchSqlDAL reservationSqlDAL = new CampgroundSiteSearchSqlDAL(connectionString);
-            List<Site> resList = reservationSqlDAL.GetAvailalableSitesInCampground(campground.CampgroundId, arrival, departure);
-
-            Console.WriteLine("Results Matching Your Search Criteria");
-            Console.WriteLine(  "Site No.".PadRight(12) + 
-                                "Max Occup.".PadRight(12) +
-                                "Accessible?".PadRight(15) +
-                                "Max RV Length".PadRight(15) +
-                                "Utility".PadRight(12) +
-                                "Cost");
-
-            TimeSpan interval = departure - arrival;
-            decimal cost = interval.Days * campground.DailyFee;
-            if (resList.Count == 0)
+            Reservation reserve = new Reservation();
+            reserve.FromDate = arrival;
+            reserve.ToDate = departure;
+            bool quit = false;
+            while (!quit)
             {
-                Console.WriteLine("No sites available for the dates provided.");
-            }
-            else
-            {
-                for (int i = 0; i < resList.Count; i++)
+                //SiteSqlDAL siteSqlDAL = new SiteSqlDAL(connectionString);
+                //List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
+                CampgroundSiteSearchSqlDAL campgroundSiteSearchSqlDAL = new CampgroundSiteSearchSqlDAL(connectionString);
+                List<Site> resList = campgroundSiteSearchSqlDAL.GetAvailalableSitesInCampground(campground.CampgroundId, arrival, departure);
+
+                Console.WriteLine("Results Matching Your Search Criteria");
+                Console.WriteLine("Site No.".PadRight(12) +
+                                    "Max Occup.".PadRight(12) +
+                                    "Accessible?".PadRight(15) +
+                                    "Max RV Length".PadRight(15) +
+                                    "Utility".PadRight(12) +
+                                    "Cost");
+
+                TimeSpan interval = reserve.ToDate - reserve.FromDate;
+                decimal cost = interval.Days * campground.DailyFee;
+                if (resList.Count == 0)
                 {
-                    string utilities = resList[i].HasUtilities ? "Yes" : "N/A";
-                    string accessability = resList[i].HasUtilities ? "Yes" : "No";
-                    string rvStatus = resList[i].MaxRvLength == 0 ? "N/A" : resList[i].MaxRvLength.ToString();
-                    Console.WriteLine($"{resList[i].SiteNumber.ToString().PadRight(12)}" +
-                                        $"{resList[i].MaxOccupants.ToString().PadRight(12)}" +
-                                        $"{accessability}".PadRight(15) +
-                                        $"{rvStatus.PadRight(15)}" +
-                                        $"{utilities}".PadRight(12) +
-                                        $"{cost.ToString("C2")}");
-                }
-                int resSiteId = 0;
-                int selection = CLIHelper.GetInteger("Which site should be reserved (enter 0 to cancel)?");
-                if (selection < 0)
-                {
-                    Console.WriteLine(" Invalid selection. Please try again.");
+                    Console.WriteLine("No sites available for the dates provided.");
                 }
                 else
                 {
                     for (int i = 0; i < resList.Count; i++)
                     {
-                        if (resList[i].SiteNumber == selection)
-                        {
-                            resSiteId = resList[i].SiteId;
-                        }
+                        string utilities = resList[i].HasUtilities ? "Yes" : "N/A";
+                        string accessability = resList[i].HasUtilities ? "Yes" : "No";
+                        string rvStatus = resList[i].MaxRvLength == 0 ? "N/A" : resList[i].MaxRvLength.ToString();
+                        Console.WriteLine($"{resList[i].SiteNumber.ToString().PadRight(12)}" +
+                                            $"{resList[i].MaxOccupants.ToString().PadRight(12)}" +
+                                            $"{accessability}".PadRight(15) +
+                                            $"{rvStatus.PadRight(15)}" +
+                                            $"{utilities}".PadRight(12) +
+                                            $"{cost.ToString("C2")}");
                     }
-                    if (resSiteId == 0)
+                    reserve.SiteId = 0;
+                    int selection = CLIHelper.GetInteger("Which site should be reserved (enter 0 to cancel)?");
+                    if (selection < 0)
                     {
                         Console.WriteLine(" Invalid selection. Please try again.");
                     }
+                    else if (selection == 0)
+                    {
+                        quit = true;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < resList.Count; i++)
+                        {
+                            if (resList[i].SiteNumber == selection)
+                            {
+                                reserve.SiteId = resList[i].SiteId;
+                            }
+                        }
+                        if (reserve.SiteId == 0)
+                        {
+                            Console.WriteLine(" Invalid selection. Please try again.");
+                        }
+                    }
+                    Console.WriteLine("What name Should the reservation be made under?");
+                    reserve.Name = Console.ReadLine();
+                    ReservationSqlDAL reservationSqlDAL = new ReservationSqlDAL(connectionString);
+                    reservationSqlDAL.AddReservation(reserve);
+                    Console.WriteLine("you have successfully completed your reservation.\n Press any key to go back");
+                    Console.ReadKey();
+                    quit = true;
                 }
             }
-            Console.ReadKey();
+
         }
 
         private void PrintHeader()

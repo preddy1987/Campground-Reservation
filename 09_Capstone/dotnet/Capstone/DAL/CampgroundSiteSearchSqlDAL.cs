@@ -13,14 +13,15 @@ namespace NatParkCampRes.DAL
         private const string SqlSelectAvailableSitesInCampground = "select * from site LEFT OUTER JOIN( " +
         "SELECT DISTINCT q.site_number as site_conflict " +
         "FROM (SELECT site_number, " +
-        "   site.site_id, " +
-        "   site.campground_id, " +
-        "   site.max_occupancy, " +
-        "   site.accessible, " +
-        "   site.max_rv_length, " +
-        "   site.utilities, " +
+        "   site.site_id,          " +
+        "   site.campground_id,    " +
+        "   site.max_occupancy,    " +
+        "   site.accessible,       " +
+        "   site.max_rv_length,    " +
+        "   site.utilities,        " +
         "   reservation.from_date, " +
-        "   reservation.to_date " +
+        "   reservation.to_date   " +
+            " " +
         "FROM site JOIN reservation ON site.site_id = reservation.site_id " +
         "WHERE (campground_id = @CampId " +
         "        AND " +
