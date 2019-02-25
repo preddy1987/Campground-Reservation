@@ -70,11 +70,10 @@ namespace NatParkCampResCLI
         /// <param name="park">Park object</param>
         private void ParkInfoMenu(Park park)
         {
-            DisplayParkInfo(park);
-
             bool quit = false;
             while (!quit)
             {
+                DisplayParkInfo(park);
                 int selection = CLIHelper.GetSingleInteger("Select an option...", 1, 3);
 
                 if (selection == 1)
@@ -121,7 +120,8 @@ namespace NatParkCampResCLI
         }
 
         /// <summary>
-        /// 
+        /// Display sites in campground in park, accept reservation start and end dates,
+        /// validate dates.
         /// </summary>
         /// <param name="park">Park object</param>
         private void DisplayReservationMenu(Park park)
@@ -156,6 +156,8 @@ namespace NatParkCampResCLI
                     }
                     else { Console.WriteLine("\n Invalid arrival date.  Must be today or in the future.");}
                 }
+                Console.Write("\n Press any key to continue.");
+                Console.ReadKey();
             }
         }
 
@@ -174,38 +176,18 @@ namespace NatParkCampResCLI
             while (!quit)
             {
                 SiteSqlDAL siteSqlDAL = new SiteSqlDAL(_connectionString);
-                //List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
-                //CampgroundSiteSearchSqlDAL campgroundSiteSearchSqlDAL = new CampgroundSiteSearchSqlDAL(_connectionString);
                 List<Site> resList = siteSqlDAL.GetAvailalableSitesInCampground(campground.CampgroundId, arrival, departure);
-
-                Console.WriteLine("\nResults Matching Your Search Criteria");
-                Console.WriteLine("Site No.".PadRight(12) +
-                                    "Max Occup.".PadRight(12) +
-                                    "Accessible?".PadRight(15) +
-                                    "Max RV Length".PadRight(15) +
-                                    "Utility".PadRight(12) +
-                                    "Cost");
-
                 TimeSpan interval = reserve.ToDate - reserve.FromDate;
                 decimal cost = interval.Days * campground.DailyFee;
+
                 if (resList.Count == 0)
                 {
-                    Console.WriteLine("No sites available for the dates provided.");
+                    Console.WriteLine("\nNo sites available for the dates provided.");
                 }
                 else
                 {
-                    for (int i = 0; i < resList.Count; i++)
-                    {
-                        string utilities = resList[i].HasUtilities ? "Yes" : "N/A";
-                        string accessability = resList[i].HasUtilities ? "Yes" : "No";
-                        string rvStatus = resList[i].MaxRvLength == 0 ? "N/A" : resList[i].MaxRvLength.ToString();
-                        Console.WriteLine($"{resList[i].SiteNumber.ToString().PadRight(12)}" +
-                                            $"{resList[i].MaxOccupants.ToString().PadRight(12)}" +
-                                            $"{accessability}".PadRight(15) +
-                                            $"{rvStatus.PadRight(15)}" +
-                                            $"{utilities}".PadRight(12) +
-                                            $"{cost.ToString("C2")}");
-                    }
+                    DisplayAvailableSites(resList, cost);
+
                     reserve.SiteId = 0;
                     int selection = CLIHelper.GetInteger("Which site should be reserved (enter 0 to cancel)?");
                     if (selection < 0)
@@ -235,8 +217,7 @@ namespace NatParkCampResCLI
                     ReservationSqlDAL reservationSqlDAL = new ReservationSqlDAL(_connectionString);
                     reserve = reservationSqlDAL.AddReservation(reserve);
                     Console.WriteLine($"The reservation has been made and the confirmation id is {reserve.ReservationId}");
-                    Console.Write("\n Press any key to continue.");
-                    Console.ReadKey();
+
                     quit = true;
                 }
             }
@@ -322,13 +303,49 @@ namespace NatParkCampResCLI
         }
 
         /// <summary>
+        /// Display list of available sites 
+        /// </summary>
+        /// <param name="sitelist">List of Site objects</param>
+        /// <param name="cost">Total cost of site for requested dates</param>
+        private void DisplayAvailableSites(List<Site> sitelist, decimal cost)
+        {
+            Console.WriteLine("\nResults Matching Your Search Criteria");
+            Console.WriteLine("Site No.".PadRight(12) +
+                                "Max Occup.".PadRight(12) +
+                                "Accessible?".PadRight(15) +
+                                "Max RV Length".PadRight(15) +
+                                "Utility".PadRight(12) +
+                                "Cost");
+
+            for (int i = 0; i < sitelist.Count; i++)
+            {
+                string utilities = sitelist[i].HasUtilities ? "Yes" : "N/A";
+                string accessability = sitelist[i].HasUtilities ? "Yes" : "No";
+                string rvStatus = sitelist[i].MaxRvLength == 0 ? "N/A" : sitelist[i].MaxRvLength.ToString();
+                Console.WriteLine($"{sitelist[i].SiteNumber.ToString().PadRight(12)}" +
+                                    $"{sitelist[i].MaxOccupants.ToString().PadRight(12)}" +
+                                    $"{accessability}".PadRight(15) +
+                                    $"{rvStatus.PadRight(15)}" +
+                                    $"{utilities}".PadRight(12) +
+                                    $"{cost.ToString("C2")}");
+            }
+        }
+
+        /// <summary>
         /// Check arrival date is today or in future
         /// </summary>
         /// <param name="arrival">Arrival DateTime</param>
         /// <returns>true if date is today or later, false otherwise</returns>
         private bool ValidArrivalDate(DateTime arrival)
         {
-            return true;
+            bool result = false;
+
+            if ( DateTime.Parse(arrival.ToShortDateString()) >= DateTime.Parse(DateTime.Now.ToShortDateString()) )
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -338,7 +355,14 @@ namespace NatParkCampResCLI
         /// <returns>true if date is in future, false otherwise</returns>
         private bool ValidDepartureDate(DateTime departure)
         {
-            return true;
+            bool result = false;
+
+            if ( DateTime.Parse(departure.ToShortDateString()) > DateTime.Parse(DateTime.Now.ToShortDateString()) )
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -349,7 +373,14 @@ namespace NatParkCampResCLI
         /// <returns>true if departure date later than arrival date</returns>
         private bool ValidReservationDates(DateTime arrival, DateTime departure)
         {
-            return true;
+            bool result = false;
+
+            if ( DateTime.Parse(departure.ToShortDateString()) > DateTime.Parse(arrival.ToShortDateString()) )
+            {
+                result = true;
+            }
+
+            return result;
         }
         #endregion
     }

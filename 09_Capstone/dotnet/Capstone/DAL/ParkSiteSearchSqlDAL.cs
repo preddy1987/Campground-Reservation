@@ -4,6 +4,9 @@ using System.Text;
 using NatParkCampRes.Models;
 using System.Data.SqlClient;
 
+//Bonus Material 
+//    Not Yet implemented
+
 namespace NatParkCampRes.DAL
 {
     class ParkSiteSearchSqlDAL

@@ -16,9 +16,17 @@ namespace NatParkCampResCLI
             IConfigurationRoot configuration = builder.Build();
 
             string connectionString = configuration.GetConnectionString("Project");
-
-            NatParkCampResCLI cli = new NatParkCampResCLI(connectionString);
-            cli.MainMenu();
+            try
+            {
+                NatParkCampResCLI cli = new NatParkCampResCLI(connectionString);
+                cli.MainMenu();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.Write("\nPress any key to exit.");
+                Console.ReadKey();
+            }
         }
     }
 }

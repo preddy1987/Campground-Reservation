@@ -11,8 +11,6 @@ namespace NatParkCampRes.DAL
     {
 
         #region Constants
-        private const string SqlSelectAllSites = "SELECT * FROM site;";
-        private const string SqlSelectCampgroundSites = "Select TOP 5 * from site WHERE campground_id = @CampGround;";
         private const string SqlSelectAvailableSitesInCampground = "select TOP 5 * from site LEFT OUTER JOIN( " +
                                                                         "SELECT DISTINCT q.site_number as site_conflict FROM (" +
                                                                         "SELECT site_number, " +
@@ -59,96 +57,12 @@ namespace NatParkCampRes.DAL
 
         #region Methods
         /// <summary>
-        /// 
+        /// Find a list of available site in a campground in a park
         /// </summary>
+        /// <param name="campground_id"></param>
+        /// <param name="arrival">DateTime Start of requested reservation</param>
+        /// <param name="departure">DateTime End of requested reservation</param>
         /// <returns></returns>
-        public List<Site> GetAllSites()
-        {
-            List<Site> output = new List<Site>();
-
-            //Always wrap connection to a database in a try-catch block
-            try
-            {
-                //Create a SqlConnection to our database
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    SqlCommand cmd = new SqlCommand(SqlSelectAllSites, connection);
-
-                    // Execute the query to the database
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    // The results come back as a SqlDataReader. Loop through each of the rows
-                    // and add to the output list
-                    while (reader.Read())
-                    {
-                        // Read in the value from the reader
-                        // Reference by index or by column_name
-                        Site site = new Site();
-                        site.SiteId = Convert.ToInt32(reader["site_id"]);
-                        site.CampgroundId = Convert.ToInt32(reader["campground_id"]);
-                        site.SiteNumber = Convert.ToInt32(reader["site_number"]);
-                        site.MaxOccupants = Convert.ToInt32(reader["max_occupancy"]);
-                        site.IsAccessible = Convert.ToBoolean(reader["accessible"]);
-                        site.MaxRvLength = Convert.ToInt32(reader["max_rv_length"]);
-                        site.HasUtilities = Convert.ToBoolean(reader["utilities"]);
-
-                        // Add the department to the output list                       
-                        output.Add(site);
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                // A SQL Exception Occurred. Log and throw to our application!!
-                throw;
-            }
-            return output;
-        }
-        public List<Site> GetAllCampgroundSites(int campgroundId)
-        {
-            List<Site> output = new List<Site>();
-
-            //Always wrap connection to a database in a try-catch block
-            try
-            {
-                //Create a SqlConnection to our database
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    SqlCommand cmd = new SqlCommand(SqlSelectCampgroundSites, connection);
-                    cmd.Parameters.AddWithValue("@CampGround", campgroundId);
-
-                    // Execute the query to the database
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    // The results come back as a SqlDataReader. Loop through each of the rows
-                    // and add to the output list
-                    while (reader.Read())
-                    {
-                        // Read in the value from the reader
-                        // Reference by index or by column_name
-                        Site site = new Site();
-                        site.SiteId = Convert.ToInt32(reader["site_id"]);
-                        site.CampgroundId = Convert.ToInt32(reader["campground_id"]);
-                        site.SiteNumber = Convert.ToInt32(reader["site_number"]);
-                        site.MaxOccupants = Convert.ToInt32(reader["max_occupancy"]);
-                        site.IsAccessible = Convert.ToBoolean(reader["accessible"]);
-                        site.MaxRvLength = Convert.ToInt32(reader["max_rv_length"]);
-                        site.HasUtilities = Convert.ToBoolean(reader["utilities"]);
-
-                        // Add the department to the output list                       
-                        output.Add(site);
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                // A SQL Exception Occurred. Log and throw to our application!!
-                throw;
-            }
-            return output;
-        }
         public List<Site> GetAvailalableSitesInCampground(int campground_id, DateTime arrival, DateTime departure)
         {
             List<Site> output = new List<Site>();
