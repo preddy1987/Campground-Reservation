@@ -10,8 +10,9 @@ namespace NatParkCampResCLI
 {
     public class NatParkCampResCLI
     {
-        private string connectionString { get; set; }
-        List<string> monthNames = new List<string>()
+        #region Member Variables
+        private string _connectionString { get; set; }
+        List<string> _monthNames = new List<string>()
         {
             "January",
             "February",
@@ -26,35 +27,28 @@ namespace NatParkCampResCLI
             "November",
             "December",
         };
+        #endregion
 
-
-
+        #region Constructor
         public NatParkCampResCLI(string connectionStringDb)
         {
-            connectionString = connectionStringDb;
+            _connectionString = connectionStringDb;
         }
+        #endregion
 
+        #region public Methods
+        /// <summary>
+        /// Main Menu 
+        /// </summary>
         public void MainMenu()
         {
-            ParksSqlDAL parkSqlDal = new ParksSqlDAL(connectionString);
+            ParksSqlDAL parkSqlDal = new ParksSqlDAL(_connectionString);
             bool quit = false;
 
             while (!quit)
             {
-                PrintHeader();
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("View Park\n Select a Park for Further Details");
-                List<Park> parkList = parkSqlDal.GetAllParks();
-                //parkList.Sort();
-
-                for (int i = 1; i <= parkList.Count; i++)
-                {
-                    Console.WriteLine($"{i}) {parkList[i - 1].Name}");
-                }
-
-                Console.WriteLine("Q) Quit");
-
-                Console.WriteLine();
+                List<Park> parkList = parkSqlDal.GetAllParks();      // get a list of all parks
+                DisplayParkList(parkList);                          // Write list of parks to console
 
                 int selection = CLIHelper.GetSingleIntegerOrQ("Select an option...", 1, parkList.Count);
                 if (selection == -1)
@@ -63,33 +57,24 @@ namespace NatParkCampResCLI
                 }
                 else
                 {
-                    DisplayParkInfo(parkList[selection - 1]);
+                    ParkInfoMenu(parkList[selection - 1]);
                 }
             }
         }
+        #endregion
 
-        private void DisplayParkInfo(Park park)
+        #region private Methods
+        /// <summary>
+        /// Park selection menu
+        /// </summary>
+        /// <param name="park">Park object</param>
+        private void ParkInfoMenu(Park park)
         {
+            DisplayParkInfo(park);
+
             bool quit = false;
             while (!quit)
             {
-                PrintHeader();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Park Information");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine($"{park.Name}");
-                Console.WriteLine($"Location:         {park.Location}");
-                Console.WriteLine($"Established:      {park.EstablishDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))}");
-                Console.WriteLine($"Area:             {park.Area} sq km");
-                Console.WriteLine($"Annual Visitors:  {park.Visitors}");
-                Console.WriteLine();
-                Console.WriteLine($"{park.Desc}");
-                Console.WriteLine();
-                Console.WriteLine("Select a Command");
-                Console.WriteLine("1) View Campgrounds");
-                Console.WriteLine("2) Search for Reservation");
-                Console.WriteLine("3) Return to Previous Screen");
-
                 int selection = CLIHelper.GetSingleInteger("Select an option...", 1, 3);
 
                 if (selection == 1)
@@ -106,32 +91,18 @@ namespace NatParkCampResCLI
                 }
             }
         }
-        private List<Campground> DisplayCampgroundInfo(Park park)
-        {
-            CampgroundSqlDAL campgroundSqlDAL = new CampgroundSqlDAL(connectionString);
 
-            PrintHeader();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Park Campgrounds");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"{park.Name} Campgrounds");
-            Console.WriteLine();
-            Console.WriteLine("     Name".PadRight(40) + "Open".PadRight(10) + "Close".PadRight(10) + " Daily Fee");
-            List<Campground> campList = campgroundSqlDAL.GetCampgroundsInPark(park);
-
-            for (int i = 1; i <= campList.Count; i++)
-            {
-                Console.WriteLine($"#{i.ToString().Trim().PadRight(4)}{campList[i - 1].Name.PadRight(35)}{monthNames[campList[i - 1].OpenFromMonth - 1].PadRight(10)}{monthNames[campList[i - 1].OpenToMonth - 1].PadRight(10)} {campList[i - 1].DailyFee.ToString("C2").PadLeft(9)}");
-            }
-            return campList;
-
-        }
+        /// <summary>
+        /// Campground selection menu
+        /// </summary>
+        /// <param name="park">Park object</param>
         private void DisplayCampgroundMenu(Park park)
         {
             bool quit = false;
             while (!quit)
             {
                 List<Campground> campList = DisplayCampgroundInfo(park);
+
                 Console.WriteLine();
                 Console.WriteLine("Select a Command");
                 Console.WriteLine("1) Search for Available Reservation");
@@ -148,6 +119,11 @@ namespace NatParkCampResCLI
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="park">Park object</param>
         private void DisplayReservationMenu(Park park)
         {
             bool quit = false;
@@ -164,13 +140,32 @@ namespace NatParkCampResCLI
                 else
                 {
                     DateTime arrivalDate = CLIHelper.GetDateTime("\nWhat is the arrival date?");
-                    DateTime departDate = CLIHelper.GetDateTime("What is the departure date?");
-                    Console.WriteLine();
-                    SiteSelectionMenu(campList[selection - 1], arrivalDate, departDate);
+                    if ( ValidArrivalDate(arrivalDate) )
+                    {
+                        DateTime departDate = CLIHelper.GetDateTime("What is the departure date?");
+                        if ( ValidDepartureDate(departDate) )
+                        {
+                            if ( ValidReservationDates(arrivalDate, departDate) )
+                            {
+                                SiteSelectionMenu(campList[selection - 1], arrivalDate, departDate);
+                                quit = true;
+                            }
+                            else {Console.WriteLine("\n Departure date must be greater that arrival date.");}                            
+                        }
+                        else {Console.WriteLine("\n Invalid departure Date. Must be in the future.");}
+                    }
+                    else { Console.WriteLine("\n Invalid arrival date.  Must be today or in the future.");}
                 }
             }
         }
-        private void SiteSelectionMenu(Campground campground,DateTime arrival,DateTime departure)
+
+        /// <summary>
+        /// Select from available sites in selected campground
+        /// </summary>
+        /// <param name="campground"></param>
+        /// <param name="arrival"></param>
+        /// <param name="departure"></param>
+        private void SiteSelectionMenu(Campground campground, DateTime arrival, DateTime departure)
         {
             Reservation reserve = new Reservation();
             reserve.FromDate = arrival;
@@ -178,12 +173,12 @@ namespace NatParkCampResCLI
             bool quit = false;
             while (!quit)
             {
-                //SiteSqlDAL siteSqlDAL = new SiteSqlDAL(connectionString);
+                SiteSqlDAL siteSqlDAL = new SiteSqlDAL(_connectionString);
                 //List<Site> siteList = siteSqlDAL.GetAllCampgroundSites(campground.CampgroundId);
-                CampgroundSiteSearchSqlDAL campgroundSiteSearchSqlDAL = new CampgroundSiteSearchSqlDAL(connectionString);
-                List<Site> resList = campgroundSiteSearchSqlDAL.GetAvailalableSitesInCampground(campground.CampgroundId, arrival, departure);
+                //CampgroundSiteSearchSqlDAL campgroundSiteSearchSqlDAL = new CampgroundSiteSearchSqlDAL(_connectionString);
+                List<Site> resList = siteSqlDAL.GetAvailalableSitesInCampground(campground.CampgroundId, arrival, departure);
 
-                Console.WriteLine("Results Matching Your Search Criteria");
+                Console.WriteLine("\nResults Matching Your Search Criteria");
                 Console.WriteLine("Site No.".PadRight(12) +
                                     "Max Occup.".PadRight(12) +
                                     "Accessible?".PadRight(15) +
@@ -237,16 +232,19 @@ namespace NatParkCampResCLI
                     }
                     Console.WriteLine("What name Should the reservation be made under?");
                     reserve.Name = Console.ReadLine();
-                    ReservationSqlDAL reservationSqlDAL = new ReservationSqlDAL(connectionString);
+                    ReservationSqlDAL reservationSqlDAL = new ReservationSqlDAL(_connectionString);
                     reserve = reservationSqlDAL.AddReservation(reserve);
                     Console.WriteLine($"The reservation has been made and the confirmation id is {reserve.ReservationId}");
+                    Console.Write("\n Press any key to continue.");
                     Console.ReadKey();
                     quit = true;
                 }
             }
-
         }
 
+        /// <summary>
+        /// Print Screen header helper 
+        /// </summary>
         private void PrintHeader()
         {
             Console.Clear();
@@ -256,5 +254,103 @@ namespace NatParkCampResCLI
             Console.WriteLine("****************************************************************");
             Console.WriteLine();
         }
+
+        /// <summary>
+        /// Display the list of parks to the Console
+        /// </summary>
+        /// <param name="parklist"></param>
+        private void DisplayParkList(List<Park> parklist)
+        {
+            PrintHeader();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("View Park\n Select a Park for Further Details");
+            for (int i = 1; i <= parklist.Count; i++)
+            {
+                Console.WriteLine($"{i}) {parklist[i - 1].Name}");
+            }
+     
+            Console.WriteLine("Q) Quit\n");
+        }
+
+        /// <summary>
+        /// Display the Park information block
+        /// </summary>
+        /// <param name="park"></param>
+        private void DisplayParkInfo(Park park)
+        {
+            PrintHeader();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Park Information");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"{park.Name}");
+            Console.WriteLine($"Location:         {park.Location}");
+            Console.WriteLine($"Established:      {park.EstablishDate.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))}");
+            Console.WriteLine($"Area:             {park.Area} sq km");
+            Console.WriteLine($"Annual Visitors:  {park.Visitors}");
+            Console.WriteLine();
+            Console.WriteLine($"{park.Desc}");
+            Console.WriteLine();
+            Console.WriteLine("Select a Command");
+            Console.WriteLine("1) View Campgrounds");
+            Console.WriteLine("2) Search for Reservation");
+            Console.WriteLine("3) Return to Previous Screen");
+        }
+
+        /// <summary>
+        /// Display Campground list for selected Park
+        /// </summary>
+        /// <param name="park">Park object</param>
+        /// <returns>List of campground objects</returns>
+        private List<Campground> DisplayCampgroundInfo(Park park)
+        {
+            CampgroundSqlDAL campgroundSqlDAL = new CampgroundSqlDAL(_connectionString);
+
+            PrintHeader();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Park Campgrounds");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"{park.Name} Campgrounds");
+            Console.WriteLine();
+            Console.WriteLine("     Name".PadRight(40) + "Open".PadRight(10) + "Close".PadRight(10) + " Daily Fee");
+            List<Campground> campList = campgroundSqlDAL.GetCampgroundsInPark(park);
+
+            for (int i = 1; i <= campList.Count; i++)
+            {
+                Console.WriteLine($"#{i.ToString().Trim().PadRight(4)}{campList[i - 1].Name.PadRight(35)}{_monthNames[campList[i - 1].OpenFromMonth - 1].PadRight(10)}{_monthNames[campList[i - 1].OpenToMonth - 1].PadRight(10)} {campList[i - 1].DailyFee.ToString("C2").PadLeft(9)}");
+            }
+            return campList;
+        }
+
+        /// <summary>
+        /// Check arrival date is today or in future
+        /// </summary>
+        /// <param name="arrival">Arrival DateTime</param>
+        /// <returns>true if date is today or later, false otherwise</returns>
+        private bool ValidArrivalDate(DateTime arrival)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Check departure date is in future
+        /// </summary>
+        /// <param name="departure">Departure DateTime</param>
+        /// <returns>true if date is in future, false otherwise</returns>
+        private bool ValidDepartureDate(DateTime departure)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Check departure date is greater than arrival date
+        /// </summary>
+        /// <param name="arrival">Date of arrival</param>
+        /// <param name="departure">Date of departure</param>
+        /// <returns>true if departure date later than arrival date</returns>
+        private bool ValidReservationDates(DateTime arrival, DateTime departure)
+        {
+            return true;
+        }
+        #endregion
     }
 }
