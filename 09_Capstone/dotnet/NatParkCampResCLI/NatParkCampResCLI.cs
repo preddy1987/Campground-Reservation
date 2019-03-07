@@ -194,12 +194,14 @@ namespace NatParkCampResCLI
                     {
                         Console.WriteLine(" Invalid selection. Please try again.");
                     }
-                    else if (selection == 0)
+                    //else if (selection == 0)
+                    //{
+                    //    quit = true;
+                    //}
+                    else if(selection > 0)
                     {
-                        quit = true;
-                    }
-                    else
-                    {
+                        //var site = resList.Find(m => m.SiteId == selection);
+
                         for (int i = 0; i < resList.Count; i++)
                         {
                             if (resList[i].SiteNumber == selection)
@@ -297,7 +299,11 @@ namespace NatParkCampResCLI
 
             for (int i = 1; i <= campList.Count; i++)
             {
-                Console.WriteLine($"#{i.ToString().Trim().PadRight(4)}{campList[i - 1].Name.PadRight(35)}{_monthNames[campList[i - 1].OpenFromMonth - 1].PadRight(10)}{_monthNames[campList[i - 1].OpenToMonth - 1].PadRight(10)} {campList[i - 1].DailyFee.ToString("C2").PadLeft(9)}");
+                Console.WriteLine($"#{i.ToString().Trim().PadRight(4)}" +
+                                  $"{campList[i - 1].Name.PadRight(35)}" +
+                                  $"{_monthNames[campList[i - 1].OpenFromMonth - 1].PadRight(10)}" +
+                                  $"{_monthNames[campList[i - 1].OpenToMonth - 1].PadRight(10)} " +
+                                  $"{campList[i - 1].DailyFee.ToString("C2").PadLeft(9)}");
             }
             return campList;
         }

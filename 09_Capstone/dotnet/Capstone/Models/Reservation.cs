@@ -4,9 +4,19 @@ using System.Text;
 
 namespace NatParkCampRes.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Reservation
     { 
+        /// <summary>
+        /// 
+        /// </summary>
         public int ReservationId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public int SiteId { get; set; }
         public string Name { get; set; }
         public DateTime FromDate { get; set; }
